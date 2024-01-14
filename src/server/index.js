@@ -1,5 +1,5 @@
 const dev = process.env.NODE_ENV !== "production";
-const port = process.env.PORT || 3002;
+const port = 3002;
 
 import app from "./app.js";
 
