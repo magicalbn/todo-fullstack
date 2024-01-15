@@ -14,7 +14,7 @@ const AlertModal = ({ open, onClose, onConfirm, content }) => {
     return (
         <>
             <AlertDialog open={open} onOpenChange={onClose}>
-                <AlertDialogContent>
+                <AlertDialogContent className="w-[80%]">
                     <AlertDialogHeader>
                         <AlertDialogTitle>{content.title}</AlertDialogTitle>
                         <AlertDialogDescription>

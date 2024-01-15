@@ -6,24 +6,45 @@ import { Button } from "./ui/button";
 import { Plus } from "lucide-react";
 import CreateTodo from "./CreateTodo";
 import FilterTodo from "./FilterTodo";
+import TodoPaginations from "./TodoPagination/TodoPaginations";
 
 const Home = () => {
     const [todoList, setTodoList] = useState([]);
     const [totalItems, setTotalItems] = useState(1);
     const [filter, setFilter] = useState("all");
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const rowsPerPage = 10;
+
     useEffect(() => {
         fetchList();
-    }, [filter]);
+    }, [filter, currentPage]);
 
     const fetchList = () => {
-        getTodoList(filter)
+        getTodoList(filter, currentPage)
             .then((res) => {
                 setTodoList(res.data);
                 setTotalItems(res.pagination?.total);
             })
             .catch((e) => console.log(e));
     };
+
+    const changePageHandler = (next) => {
+        const totalPages = Math.ceil(totalItems / rowsPerPage);
+        if (next) {
+            if (currentPage >= totalPages) {
+                return;
+            }
+            setCurrentPage(currentPage + 1);
+        } else {
+            if (currentPage === 1) {
+                return;
+            }
+
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
     return (
         <Layout>
             <div className="mt-10 container">
@@ -32,6 +53,11 @@ const Home = () => {
                     <CreateTodo fetchList={fetchList} />
                 </div>
                 <TodoGrid todoList={todoList} fetchList={fetchList} />
+                <TodoPaginations
+                    totalPages={Math.ceil(totalItems / rowsPerPage)}
+                    currentPage={currentPage}
+                    changePageHandler={changePageHandler}
+                />
             </div>
         </Layout>
     );

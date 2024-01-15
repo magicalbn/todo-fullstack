@@ -77,7 +77,7 @@ const TodoModal = ({ open, onClose, create, onSubmit, data }) => {
     return (
         <>
             <Dialog open={open} onOpenChange={closeModal}>
-                <DialogContent>
+                <DialogContent className="w-[80%]">
                     <DialogHeader>
                         <DialogTitle>
                             {create ? "Create" : "Update"} Todo

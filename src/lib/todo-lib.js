@@ -1,8 +1,8 @@
 import axios from "@/config/todoAxios.config";
 
-export const getTodoList = async (filter, page, limit) => {
+export const getTodoList = async (filter, page) => {
     const { data } = await axios.get(
-        `?status=${filter}&page=${page}&limit=${limit}`
+        `?status=${filter}&page=${page}&limit=10}`
     );
     return data;
 };
