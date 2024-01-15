@@ -27,9 +27,9 @@ const TodoModal = ({ open, onClose, create, onSubmit, data }) => {
     const [status, setStatus] = useState(data ? data.status : "todo");
 
     const closeModal = (val) => {
-        // setTitle({ value: "", error: false });
-        // setDescription("");
-        // setStatus("todo");
+        setTitle({ value: "", error: false });
+        setDescription("");
+        setStatus("todo");
         onClose(val);
     };
 

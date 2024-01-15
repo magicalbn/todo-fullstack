@@ -23,7 +23,7 @@ const TodoRow = ({ eachTodo, index, fetchList }) => {
         setshowConfirm(true);
     };
 
-    const markTodoDone = () => {
+    const markTodoDoneHandler = () => {
         if (status === "done") {
             return;
         }
@@ -54,7 +54,9 @@ const TodoRow = ({ eachTodo, index, fetchList }) => {
             <TableRow className="cursor-pointer">
                 <TableCell className="font-medium">{index}</TableCell>
                 <TableCell>{title}</TableCell>
-                <TableCell className="hidden md:block">{description}</TableCell>
+                <TableCell className="hidden md:table-cell">
+                    {description}
+                </TableCell>
                 <TableCell>{statusMap[status]}</TableCell>
                 <TableCell>
                     <div className="flex gap-2 justify-end">
@@ -70,7 +72,7 @@ const TodoRow = ({ eachTodo, index, fetchList }) => {
                         <AlertModal
                             open={showConfirm}
                             onClose={setshowConfirm}
-                            onConfirm={markTodoDone}
+                            onConfirm={markTodoDoneHandler}
                             content={{
                                 title:
                                     status === "done"

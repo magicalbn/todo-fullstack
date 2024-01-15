@@ -3,12 +3,30 @@ import { Pencil } from "lucide-react";
 import { Button } from "./ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import TodoModal from "./TodoModal";
+import { updateTodo } from "@/lib/todo-lib";
 
 const EditTodo = ({ todoData, fetchList }) => {
     const [openModal, setOpenModal] = useState(false);
     const { toast } = useToast();
 
-    const updateTodoHandler = () => {};
+    const updateTodoHandler = (body) => {
+        updateTodo(todoData._id, body)
+            .then(() => {
+                toast({
+                    title: "Todo Item Updated",
+                    description: body.title,
+                });
+                setOpenModal(false);
+                fetchList();
+            })
+            .catch((e) => {
+                toast({
+                    variant: "destructive",
+                    title: "Error",
+                    description: "Something went wrong",
+                });
+            });
+    };
 
     return (
         <>
