@@ -13,17 +13,23 @@ import {
     DialogFooter,
 } from "@/components/ui/dialog";
 import StatusDropDown from "./Shared/StatusDropDown";
+import DeleteTodo from "./DeleteTodo";
 
-const TodoModal = ({ open, onClose, create, onSubmit }) => {
-    const [title, setTitle] = useState({ value: "", error: false });
+const TodoModal = ({ open, onClose, create, onSubmit, data }) => {
+    const [title, setTitle] = useState({
+        value: data ? data.title : "",
+        error: false,
+    });
 
-    const [description, setDescription] = useState("");
-    const [status, setStatus] = useState("todo");
+    const [description, setDescription] = useState(
+        data ? data.description : ""
+    );
+    const [status, setStatus] = useState(data ? data.status : "todo");
 
     const closeModal = (val) => {
-        setTitle({ value: "", error: false });
-        setDescription("");
-        setStatus("todo");
+        // setTitle({ value: "", error: false });
+        // setDescription("");
+        // setStatus("todo");
         onClose(val);
     };
 
@@ -59,8 +65,6 @@ const TodoModal = ({ open, onClose, create, onSubmit }) => {
     const submitHandler = () => {
         const isValid = validate();
         if (isValid) {
-            console.log({ title: title.value, description, status });
-
             const body = {
                 title: title.value,
                 description,
@@ -79,7 +83,8 @@ const TodoModal = ({ open, onClose, create, onSubmit }) => {
                             {create ? "Create" : "Update"} Todo
                         </DialogTitle>
                         <DialogDescription>
-                            {create ? "Create" : "Update"} a New Todo Item
+                            {create ? "Create a New " : "Update an existing "}
+                            Todo Item
                         </DialogDescription>
                     </DialogHeader>
                     <div className="grid gap-4 py-4">
@@ -90,6 +95,7 @@ const TodoModal = ({ open, onClose, create, onSubmit }) => {
                             <Input
                                 value={title.value}
                                 onChange={(e) => onChangeHandler(e, "title")}
+                                defaultValue={data ? data.title : ""}
                                 id="title"
                                 className={`col-span-3 ${
                                     title.error ? "border-red-600" : null
@@ -110,6 +116,7 @@ const TodoModal = ({ open, onClose, create, onSubmit }) => {
                                 onChange={(e) =>
                                     onChangeHandler(e, "description")
                                 }
+                                defaultValue={data ? data.description : ""}
                                 placeholder="Type your Descrption here"
                                 className="col-span-3"
                             />
@@ -129,9 +136,17 @@ const TodoModal = ({ open, onClose, create, onSubmit }) => {
                         </div>
                     </div>
                     <DialogFooter>
-                        <Button onClick={submitHandler} type="submit">
-                            {create ? "Create" : "Update"}
-                        </Button>
+                        <div className="flex justify-end items-center">
+                            {!create && data && (
+                                <DeleteTodo
+                                    todoId={data._id}
+                                    fetchList={data.fetchList}
+                                />
+                            )}
+                            <Button onClick={submitHandler} type="submit">
+                                {create ? "Create" : "Update"}
+                            </Button>
+                        </div>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>

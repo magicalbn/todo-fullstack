@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { Button } from "../ui/button";
-import { Check, Pencil, Trash2 } from "lucide-react";
+import { Check } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
 import AlertModal from "../Shared/AlertModal";
 import { updateTodo } from "@/lib/todo-lib";
+import EditTodo from "../EditTodo";
 
 const TodoRow = ({ eachTodo, index, fetchList }) => {
     const { title, description, status } = eachTodo;
@@ -31,7 +32,6 @@ const TodoRow = ({ eachTodo, index, fetchList }) => {
             description,
             status: "done",
         };
-        console.log("marked as done");
         updateTodo(eachTodo._id, body)
             .then(() => {
                 toast({
@@ -58,9 +58,7 @@ const TodoRow = ({ eachTodo, index, fetchList }) => {
                 <TableCell>{statusMap[status]}</TableCell>
                 <TableCell>
                     <div className="flex gap-2 justify-end">
-                        <Button variant="outline" className="p-3 h-[40px]">
-                            <Pencil size={17} />
-                        </Button>
+                        <EditTodo todoData={eachTodo} fetchList={fetchList} />
 
                         <Button
                             className="p-3 h-[40px] bg-green-700 opacity-70 hover:opacity-100 hover:bg-green-700"

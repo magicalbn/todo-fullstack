@@ -19,7 +19,6 @@ const Home = () => {
     const fetchList = () => {
         getTodoList(filter)
             .then((res) => {
-                // console.log(res);
                 setTodoList(res.data);
                 setTotalItems(res.pagination?.total);
             })

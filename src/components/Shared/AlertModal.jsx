@@ -29,7 +29,6 @@ const AlertModal = ({ open, onClose, onConfirm, content }) => {
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
-            ;
         </>
     );
 };
