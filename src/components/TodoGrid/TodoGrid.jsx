@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/table";
 import TodoRow from "./TodoRow";
 
-const TodoGrid = ({ todoList }) => {
+const TodoGrid = ({ todoList, fetchList }) => {
     return (
         <Table>
             <TableCaption>A list of your ToDos.</TableCaption>
@@ -31,6 +31,7 @@ const TodoGrid = ({ todoList }) => {
                             key={eachTodo._id}
                             eachTodo={eachTodo}
                             index={index + 1}
+                            fetchList={fetchList}
                         />
                     );
                 })}

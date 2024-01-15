@@ -32,7 +32,7 @@ const Home = () => {
                     <FilterTodo filter={true} setFilter={setFilter} />
                     <CreateTodo fetchList={fetchList} />
                 </div>
-                <TodoGrid todoList={todoList} />
+                <TodoGrid todoList={todoList} fetchList={fetchList} />
             </div>
         </Layout>
     );

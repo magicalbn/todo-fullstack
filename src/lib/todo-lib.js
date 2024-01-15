@@ -12,6 +12,13 @@ export const createTodo = async (body) => {
     return data;
 };
 
+export const updateTodo = async (id, body) => {
+    console.log("recieved", id, body);
+    const { data } = await axios.put(`/${id}`, body);
+    console.log("response", data);
+    return data;
+};
+
 export const deleteTodo = async (todoID) => {
     const { data } = await axios.delete(`/${todoID}`);
     return data;
