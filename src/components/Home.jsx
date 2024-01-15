@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import Layout from "./Shared/Layout";
 import { getTodoList } from "@/lib/todo-lib";
 import TodoGrid from "./TodoGrid/TodoGrid";
-import { Button } from "./ui/button";
-import { Plus } from "lucide-react";
 import CreateTodo from "./CreateTodo";
 import FilterTodo from "./FilterTodo";
 import TodoPaginations from "./TodoPagination/TodoPaginations";
@@ -45,11 +43,18 @@ const Home = () => {
         }
     };
 
+    const filterChangeHadnler = (val) => {
+        setFilter(val);
+        if (currentPage != 1) {
+            setCurrentPage(1);
+        }
+    };
+
     return (
         <Layout>
             <div className="mt-10 container">
                 <div className="flex justify-between gap-5 m-5">
-                    <FilterTodo filter={true} setFilter={setFilter} />
+                    <FilterTodo filter={true} setFilter={filterChangeHadnler} />
                     <CreateTodo fetchList={fetchList} />
                 </div>
                 <TodoGrid todoList={todoList} fetchList={fetchList} />

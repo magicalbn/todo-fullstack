@@ -11,7 +11,7 @@ import {
 
 const TodoPaginations = ({ totalPages, currentPage, changePageHandler }) => {
     return (
-        <Pagination className="justify-end">
+        <Pagination className="justify-end mt-5 mb-10">
             <PaginationContent>
                 <PaginationItem>
                     <PaginationPrevious

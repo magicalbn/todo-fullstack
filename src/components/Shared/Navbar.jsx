@@ -2,7 +2,7 @@ import React from "react";
 
 const Navbar = () => {
     return (
-        <div className="border">
+        <div className="border-b">
             <div className="container flex items-center justify-between p-5">
                 <p className="text-white font-bold text-xl cursor-pointer">
                     TODO LIST

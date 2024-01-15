@@ -7,6 +7,7 @@ import { useToast } from "@/components/ui/use-toast";
 import AlertModal from "../Shared/AlertModal";
 import { updateTodo } from "@/lib/todo-lib";
 import EditTodo from "../EditTodo";
+import DeleteTodo from "../DeleteTodo";
 
 const TodoRow = ({ eachTodo, index, fetchList }) => {
     const { title, description, status } = eachTodo;
@@ -62,13 +63,17 @@ const TodoRow = ({ eachTodo, index, fetchList }) => {
                     <div className="flex gap-2 justify-end">
                         <EditTodo todoData={eachTodo} fetchList={fetchList} />
 
-                        <Button
+                        {/* <Button
                             className="p-3 h-[40px] bg-green-700 opacity-70 hover:opacity-100 hover:bg-green-700"
                             variant="outline"
                             onClick={showConfirmationModal}
                         >
                             <Check size={17} />
-                        </Button>
+                        </Button> */}
+                        <DeleteTodo
+                            todoId={eachTodo._id}
+                            fetchList={fetchList}
+                        />
                         <AlertModal
                             open={showConfirm}
                             onClose={setshowConfirm}
